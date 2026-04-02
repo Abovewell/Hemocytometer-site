@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hemocytometer 計算ロジック説明</title>
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+    <div class="page">
+        <header class="site-header">
+            <p class="brand">Count and Dilute Documentation</p>
+            <nav class="nav" aria-label="サイトナビゲーション">
+                <a class="nav-link" href="index.html">プライバシーポリシー</a>
+                <a class="nav-link active" href="calculation.html">計算ロジック説明</a>
+            </nav>
+        </header>
+
+        <main class="content">
+            <h1 class="page-title">計算ロジック説明</h1>
+            <p class="meta">最終更新日：2026年4月1日</p>
+
+            <section class="section" id="formula">
+                <h2>1. 計算式</h2>
+                <div class="formula-card">
+                    <p class="formula">細胞濃度 (cells/mL) = 細胞数合計(cells) / 血球計算盤4区画の体積(mL)</p>
+                </div>
+                <p>血球計算盤の体積は4区画合わせて（4x10^-4 mL）を基準に算出します。</p>
+            </section>
+
+            <section class="section" id="formula">
+                <h2>2. 変動係数(CV)の計算</h2>
+                <div class="formula-card">
+                    <p class="formula">
+                        各区画に入力された細胞数の不偏分散の平方根を取り、標準偏差を計算<br>
+                        CV = 標準偏差/平均 x 100
+                    </p>
+                </div>
+            </section>
+            <section class="section" id="formula">
+                <h2>3. 希釈計算</h2>
+                <div class="formula-card">
+                    <p class="formula">
+                        C1: 新しく作る細胞溶液の濃度<br>
+                        V1: 新しく作る細胞溶液の量<br>
+                        C2: 現状の細胞溶液の濃度<br>
+                        V2: 希釈する際に使用する現状の細胞溶液の量<br>
+                        M : 希釈に使用する培地の量<br>
+                        <br>
+                        C1xV1 = C2xV2より、<br>
+                        V2 = C1xV1/C2<br>
+                        M = V1-V2
+                    </p>
+                </div>
+            </section>
+            <section class="section" id="example">
+                <h2>4. 計算例</h2>
+                <p>例えば、4区画がそれぞれ25, 32, 33, 30 の場合:</p>
+                <p>
+                    <div class="example-grid">
+                        <div class="example-cell">
+                            <span class="example-label">総細胞数</span>
+                            <span class="example-value">120</span>
+                        </div>
+                        <div class="example-cell">
+                            <span class="example-label">変動係数</span>
+                            <span class="example-value">11.9 %</span>
+                        </div>
+                        <div class="example-cell">
+                            <span class="example-label">細胞濃度</span>
+                            <span class="example-value">30 × 10^4 cells/mL</span>
+                        </div>
+                        <div class="example-cell">
+                            <span class="example-label">細胞濃度</span>
+                            <span class="example-value">30 × 10^4 cells/mL</span>
+                        </div>
+                    </div>
+                </p>
+                <p>計算手順: 120 / 4x10^-4 = 30x10^4 cells/mL</p>
+            </section>
+
+            <footer class="site-footer">
+                &copy; 2026 [Abovewell]
+            </footer>
+        </main>
+    </div>
+</body>
+</html>
